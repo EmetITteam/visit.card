@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ваш менеджер</title>
+    <title>Візитівка EMET</title>
     <style>
         /* ДИЗАЙН И СТИЛИ */
         body { 
@@ -82,17 +82,17 @@
 </head>
 <body>
 
-    <div id="loader" class="loader">Загрузка...</div>
+    <div id="loader" class="loader">Завантаження...</div>
     <div id="errorMsg" class="error"></div>
 
     <div class="card" id="card">
         <img src="https://cdn-icons-png.flaticon.com/512/6821/6821002.png" class="logo" alt="Logo">
         
         <h1 id="managerName">Менеджер</h1>
-        <p>Выберите удобный способ связи</p>
+        <p>Оберіть зручний спосіб зв'язку</p>
         
-        <a id="linkViber" href="#" class="btn btn-viber" onclick="sendStat('viber')">Написать в Viber</a>
-        <a id="linkInsta" href="#" class="btn btn-insta" onclick="sendStat('insta')">Перейти в Instagram</a>
+        <a id="linkViber" href="#" class="btn btn-viber" onclick="sendStat('viber')" target="_blank">Написати у Viber</a>
+        <a id="linkInsta" href="#" class="btn btn-insta" onclick="sendStat('insta')" target="_blank">Перейти в Instagram</a>
     </div>
 
     <div class="footer">EMET UA</div>
@@ -102,11 +102,11 @@
         // НАСТРОЙКИ
         // ==========================================
         
-        // ВСТАВЬТЕ СЮДА ВАШУ ССЫЛКУ НА СКРИПТ GOOGLE (из Части 1, которая заканчивается на /exec):
+        // Ссылка на Google Script (Ваша, правильная)
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzDD6I6MooOgkt8Pqde0TRoMGqeGTec1rO-RDidSYTJgWG7926JihehAf7R4lV-nSk/exec"; 
 
 
-        // БАЗА ДАННЫХ ВСЕХ 19 МЕНЕДЖЕРОВ
+        // БАЗА ДАННЫХ ВСЕХ 19 МЕНЕДЖЕРОВ (Украинский язык)
         const managers = {
             "1": { name: "Бойко Ольга", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380979590833", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
             "2": { name: "Золотченко Олена", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675228279", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
@@ -155,7 +155,7 @@
             // Если ID нет или он неверный
             loader.style.display = 'none';
             errorMsg.style.display = 'block';
-            errorMsg.innerText = "Ошибка: Ссылка неверна или менеджер не найден.";
+            errorMsg.innerText = "Помилка: Невірне посилання або менеджера не знайдено.";
         }
 
         // Функция отправки статистики (тихая)
