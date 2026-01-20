@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ваш менеджер</title>
+    <style>
+        /* ДИЗАЙН И СТИЛИ */
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            background-color: #f4f6f8; 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+        }
+        
+        .card { 
+            background: white; 
+            width: 90%; 
+            max-width: 400px; 
+            padding: 40px 20px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            text-align: center; 
+            display: none; /* Скрыто до загрузки данных */
+        }
+
+        .logo { 
+            max-width: 150px; 
+            height: auto; 
+            margin-bottom: 20px; 
+        }
+        
+        h1 { 
+            font-size: 22px; 
+            color: #333; 
+            margin: 0 0 10px 0; 
+            line-height: 1.4;
+        }
+        
+        p { 
+            color: #777; 
+            margin-bottom: 30px; 
+            font-size: 14px; 
+        }
+        
+        /* КНОПКИ */
+        .btn { 
+            display: block; 
+            width: 100%; 
+            padding: 18px 0; 
+            margin-bottom: 15px; 
+            border-radius: 50px; 
+            font-size: 18px; 
+            font-weight: bold; 
+            color: white; 
+            cursor: pointer; 
+            text-decoration: none; 
+            box-sizing: border-box; 
+            transition: transform 0.1s; 
+        }
+        
+        .btn:active { transform: scale(0.98); }
+        
+        .btn-viber { 
+            background-color: #7360f2; 
+            box-shadow: 0 4px 15px rgba(115, 96, 242, 0.3); 
+        }
+        
+        .btn-insta { 
+            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
+            box-shadow: 0 4px 15px rgba(220, 39, 67, 0.3); 
+        }
+        
+        .footer { margin-top: 20px; font-size: 12px; color: #ccc; }
+        .loader { font-size: 18px; color: #666; margin-top: 20px; }
+        .error { color: #e74c3c; font-weight: bold; display: none; }
+    </style>
+</head>
+<body>
+
+    <div id="loader" class="loader">Загрузка...</div>
+    <div id="errorMsg" class="error"></div>
+
+    <div class="card" id="card">
+        <img src="https://cdn-icons-png.flaticon.com/512/6821/6821002.png" class="logo" alt="Logo">
+        
+        <h1 id="managerName">Менеджер</h1>
+        <p>Выберите удобный способ связи</p>
+        
+        <a id="linkViber" href="#" class="btn btn-viber" onclick="sendStat('viber')">Написать в Viber</a>
+        <a id="linkInsta" href="#" class="btn btn-insta" onclick="sendStat('insta')">Перейти в Instagram</a>
+    </div>
+
+    <div class="footer">EMET UA</div>
+
+    <script>
+        // ==========================================
+        // НАСТРОЙКИ
+        // ==========================================
+        
+        // ВСТАВЬТЕ СЮДА ВАШУ ССЫЛКУ НА СКРИПТ GOOGLE (из Части 1, которая заканчивается на /exec):
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzDD6I6MooOgkt8Pqde0TRoMGqeGTec1rO-RDidSYTJgWG7926JihehAf7R4lV-nSk/exec"; 
+
+
+        // БАЗА ДАННЫХ ВСЕХ 19 МЕНЕДЖЕРОВ
+        const managers = {
+            "1": { name: "Бойко Ольга", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380979590833", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "2": { name: "Золотченко Олена", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675228279", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "3": { name: "Каратеєва Олена", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380676360299", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "4": { name: "Клименко Марина", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380673350210", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "5": { name: "Крижня Карина", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675206991", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "6": { name: "Мігашко Анна", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380676428988", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "7": { name: "Пашковська Юлія", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380679216305", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "8": { name: "Пушкарська Вікторія", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380980797797", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "9": { name: "Селіванова Вікторія", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380676523343", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "10": { name: "Тесленко Марія", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380981812070", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "11": { name: "Ткаченко Юлія", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380673320440", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "12": { name: "Претолюк Ілона", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380671967707", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "13": { name: "Сірик Людмила", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380678800286", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "14": { name: "Нєкова Катерина", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380671100901", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "15": { name: "Войналович Олена", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380677875549", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "16": { name: "Бакумова Аліна", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675660356", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "17": { name: "Андрющенко Юлія", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675707868", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "18": { name: "Фещенко Ганна", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675228219", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "19": { name: "Хамуляк Альона", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380678789100", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" }
+        };
+
+        // ==========================================
+        // ЛОГИКА РАБОТЫ
+        // ==========================================
+        
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+        const loader = document.getElementById('loader');
+        const card = document.getElementById('card');
+        const errorMsg = document.getElementById('errorMsg');
+
+        // Проверяем, есть ли такой менеджер
+        if (id && managers[id]) {
+            const data = managers[id];
+            
+            // Заполняем данными
+            document.getElementById('managerName').innerHTML = "Ваш менеджер:<br>" + data.name;
+            document.getElementById('linkViber').href = data.viber;
+            document.getElementById('linkInsta').href = data.insta;
+            
+            // Показываем карточку
+            loader.style.display = 'none';
+            card.style.display = 'block';
+        } else {
+            // Если ID нет или он неверный
+            loader.style.display = 'none';
+            errorMsg.style.display = 'block';
+            errorMsg.innerText = "Ошибка: Ссылка неверна или менеджер не найден.";
+        }
+
+        // Функция отправки статистики (тихая)
+        function sendStat(type) {
+            // Если ссылка на скрипт не настроена, ничего не делаем
+            if (!SCRIPT_URL || SCRIPT_URL.includes("ВСТАВЬТЕ")) return;
+            
+            // Отправляем запрос на сервер Google без ожидания ответа
+            fetch(SCRIPT_URL + "?id=" + id + "&type=" + type + "&agent=" + navigator.userAgent, {
+                mode: 'no-cors'
+            });
+        }
+    </script>
+</body>
+</html>
