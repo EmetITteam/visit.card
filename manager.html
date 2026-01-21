@@ -69,6 +69,11 @@
             background-color: #7360f2; 
             box-shadow: 0 4px 15px rgba(115, 96, 242, 0.3); 
         }
+        /* Стиль для Telegram */
+        .btn-tg { 
+            background-color: #229ED9; 
+            box-shadow: 0 4px 15px rgba(34, 158, 217, 0.3); 
+        }
         
         .btn-insta { 
             background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); 
@@ -108,25 +113,25 @@
 
         // БАЗА ДАННЫХ ВСЕХ 19 МЕНЕДЖЕРОВ (Украинский язык)
         const managers = {
-            "1": { name: "Бойко Ольга", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380979590833", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "2": { name: "Золотченко Олена", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675228279", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "3": { name: "Каратеєва Олена", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380676360299", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "4": { name: "Клименко Марина", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380673350210", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "5": { name: "Крижня Карина", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675206991", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "6": { name: "Мігашко Анна", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380676428988", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "7": { name: "Пашковська Юлія", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380679216305", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "8": { name: "Пушкарська Вікторія", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380980797797", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "9": { name: "Селіванова Вікторія", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380676523343", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "10": { name: "Тесленко Марія", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380981812070", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "11": { name: "Ткаченко Юлія", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380673320440", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "12": { name: "Претолюк Ілона", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380671967707", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "13": { name: "Сірик Людмила", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380678800286", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "14": { name: "Нєкова Катерина", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380671100901", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "15": { name: "Войналович Олена", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380677875549", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "16": { name: "Бакумова Аліна", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675660356", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "17": { name: "Андрющенко Юлія", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675707868", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "18": { name: "Фещенко Ганна", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675228219", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "19": { name: "Хамуляк Альона", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380678789100", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" }
+            "1": { name: "Бойко Ольга", tg: "https://t.me/+380979590833", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380979590833", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "2": { name: "Золотченко Олена", tg: "https://t.me/+380675228279", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675228279", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "3": { name: "Каратеєва Олена", tg: "https://t.me/+380676360299", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380676360299", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "4": { name: "Клименко Марина", tg: "https://t.me/+380673350210", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380673350210", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "5": { name: "Крижня Карина", tg: "https://t.me/+380675206991", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675206991", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "6": { name: "Мігашко Анна", tg: "https://t.me/+380676428988", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380676428988", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "7": { name: "Пашковська Юлія", tg: "https://t.me/+380679216305", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380679216305", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "8": { name: "Пушкарська Вікторія", tg: "https://t.me/+380980797797", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380980797797", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "9": { name: "Селіванова Вікторія", tg: "https://t.me/+380676523343", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380676523343", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "10": { name: "Тесленко Марія", tg: "https://t.me/+380981812070", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380981812070", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "11": { name: "Ткаченко Юлія", tg: "https://t.me/+380673320440", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380673320440", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "12": { name: "Претолюк Ілона", tg: "https://t.me/+380671967707", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380671967707", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "13": { name: "Сірик Людмила", tg: "https://t.me/+380678800286", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380678800286", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "14": { name: "Нєкова Катерина", tg: "https://t.me/+380671100901", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380671100901", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "15": { name: "Войналович Олена", tg: "https://t.me/+380677875549", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380677875549", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "16": { name: "Бакумова Аліна", tg: "https://t.me/+380675660356", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675660356", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "17": { name: "Андрющенко Юлія", tg: "https://t.me/+380675707868", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675707868", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "18": { name: "Фещенко Ганна", tg: "https://t.me/+380675228219", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675228219", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "19": { name: "Хамуляк Альона", tg: "https://t.me/+380678789100", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380678789100", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" }
         };
 
         // ==========================================
@@ -147,6 +152,14 @@
             document.getElementById('managerName').innerHTML = "Ваш менеджер:<br>" + data.name;
             document.getElementById('linkViber').href = data.viber;
             document.getElementById('linkInsta').href = data.insta;
+            // Логика для Telegram
+const tgBtn = document.getElementById('linkTg');
+if (data.tg) {
+    tgBtn.href = data.tg;
+    tgBtn.style.display = 'block'; // Показываем кнопку
+} else {
+    tgBtn.style.display = 'none';  // Скрываем, если ссылки нет
+}
             
             // Показываем карточку
             loader.style.display = 'none';
