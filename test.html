@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Візитівка EMET</title>
+    <style>
+        /* ДИЗАЙН И СТИЛИ */
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+            background-color: #f4f6f8; 
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+        }
+        
+        .card { 
+            background: white; 
+            width: 90%; 
+            max-width: 400px; 
+            padding: 40px 20px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            text-align: center; 
+            display: none; /* Скрыто до загрузки данных */
+        }
+
+        .logo { 
+            max-width: 150px; 
+            height: auto; 
+            margin-bottom: 20px; 
+        }
+        
+        h1 { 
+            font-size: 22px; 
+            color: #333; 
+            margin: 0 0 10px 0; 
+            line-height: 1.4;
+        }
+        
+        p { 
+            color: #777; 
+            margin-bottom: 30px; 
+            font-size: 14px; 
+        }
+        
+        /* КНОПКИ */
+        .btn { 
+            display: block; 
+            width: 100%; 
+            padding: 16px 0; 
+            margin-bottom: 12px; 
+            border-radius: 50px; 
+            font-size: 18px; 
+            font-weight: bold; 
+            color: white; 
+            cursor: pointer; 
+            text-decoration: none; 
+            box-sizing: border-box; 
+            transition: transform 0.1s; 
+        }
+        
+        .btn:active { transform: scale(0.98); }
+        
+        /* ЦВЕТА КНОПОК */
+        .btn-viber { background-color: #7360f2; box-shadow: 0 4px 15px rgba(115, 96, 242, 0.3); }
+        .btn-tg { background-color: #229ED9; box-shadow: 0 4px 15px rgba(34, 158, 217, 0.3); }
+        .btn-insta { background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); box-shadow: 0 4px 15px rgba(220, 39, 67, 0.3); }
+        
+        /* Новые стили для общих контактов */
+        .btn-fb { background-color: #1877F2; box-shadow: 0 4px 15px rgba(24, 119, 242, 0.3); } /* Facebook Blue */
+        .btn-phone { background-color: #2ecc71; box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3); } /* Green */
+        .btn-mail { background-color: #7f8c8d; box-shadow: 0 4px 15px rgba(127, 140, 141, 0.3); } /* Grey */
+        .btn-site { background-color: #34495e; box-shadow: 0 4px 15px rgba(52, 73, 94, 0.3); } /* Dark Blue */
+
+        .footer { margin-top: 20px; font-size: 12px; color: #ccc; }
+        .loader { font-size: 18px; color: #666; margin-top: 20px; }
+        .error { color: #e74c3c; font-weight: bold; display: none; }
+    </style>
+</head>
+<body>
+
+    <div id="loader" class="loader">Завантаження...</div>
+    <div id="errorMsg" class="error"></div>
+
+    <div class="card" id="card">
+        <img src="https://links.emet.in.ua/wp-content/uploads/2026/01/avatar-you-tube-1_150h150.png" class="logo" alt="Logo">
+        
+        <h1 id="managerName">Менеджер</h1>
+        <p>Оберіть зручний спосіб зв'язку</p>
+        
+        <a id="linkPhone" href="#" class="btn btn-phone" onclick="sendStat('phone')" style="display:none;">📞 Зателефонувати</a>
+        <a id="linkViber" href="#" class="btn btn-viber" onclick="sendStat('viber')" target="_blank" style="display:none;">Написати у Viber</a>
+        <a id="linkTg" href="#" class="btn btn-tg" onclick="sendStat('tg')" target="_blank" style="display:none;">Написати у Telegram</a>
+        <a id="linkInsta" href="#" class="btn btn-insta" onclick="sendStat('insta')" target="_blank" style="display:none;">Перейти в Instagram</a>
+        <a id="linkFb" href="#" class="btn btn-fb" onclick="sendStat('fb')" target="_blank" style="display:none;">Facebook</a>
+        <a id="linkSite" href="#" class="btn btn-site" onclick="sendStat('site')" target="_blank" style="display:none;">🌐 Наш сайт</a>
+        <a id="linkMail" href="#" class="btn btn-mail" onclick="sendStat('email')" style="display:none;">📧 Написати e-mail</a>
+    </div>
+
+    <div class="footer">EMET UA</div>
+
+    <script>
+        // ==========================================
+        // НАСТРОЙКИ
+        // ==========================================
+        
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzDD6I6MooOgkt8Pqde0TRoMGqeGTec1rO-RDidSYTJgWG7926JihehAf7R4lV-nSk/exec"; 
+
+        // БАЗА ДАННЫХ
+        const managers = {
+            // --- ОБЩИЙ КОНТАКТ (Шоколадки/Офис) ---
+            "0": { 
+                name: "EMET", 
+                phone: "tel:+380678807700",
+                email: "mailto:info@emet.in.ua",
+                site: "https://emet.in.ua",
+                tg: "https://t.me/emetua", 
+                fb: "https://www.facebook.com/emetua",
+                insta: "https://www.instagram.com/emet.ua"
+                // Viber у общего контакта не указан, кнопка не появится
+            },
+            
+            // --- МЕНЕДЖЕРЫ ---
+            "1": { name: "Бойко Ольга", tg: "https://t.me/+380979590833", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380979590833", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "2": { name: "Золотченко Олена", tg: "https://t.me/+380675228279", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675228279", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "3": { name: "Каратеєва Олена", tg: "https://t.me/+380676360299", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380676360299", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "4": { name: "Клименко Марина", tg: "https://t.me/+380673350210", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380673350210", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "5": { name: "Крижня Карина", tg: "https://t.me/+380675206991", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675206991", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "6": { name: "Мігашко Анна", tg: "https://t.me/+380676428988", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380676428988", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "7": { name: "Пашковська Юлія", tg: "https://t.me/+380679216305", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380679216305", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "8": { name: "Пушкарська Вікторія", tg: "https://t.me/+380980797797", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380980797797", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "9": { name: "Селіванова Вікторія", tg: "https://t.me/+380676523343", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380676523343", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "10": { name: "Тесленко Марія", tg: "https://t.me/+380981812070", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380981812070", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "11": { name: "Ткаченко Юлія", tg: "https://t.me/+380673320440", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380673320440", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "12": { name: "Претолюк Ілона", tg: "https://t.me/+380671967707", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380671967707", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "13": { name: "Сірик Людмила", tg: "https://t.me/+380678800286", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380678800286", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "14": { name: "Нєкова Катерина", tg: "https://t.me/+380671100901", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380671100901", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "15": { name: "Войналович Олена", tg: "https://t.me/+380677875549", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380677875549", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "16": { name: "Бакумова Аліна", tg: "https://t.me/+380675660356", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675660356", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "17": { name: "Андрющенко Юлія", tg: "https://t.me/+380675707868", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675707868", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "18": { name: "Фещенко Ганна", tg: "https://t.me/+380675228219", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675228219", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
+            "19": { name: "Хамуляк Альона", tg: "https://t.me/+380678789100", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380678789100", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" }
+        };
+
+        // ==========================================
+        // ЛОГИКА РАБОТЫ
+        // ==========================================
+        
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+        const loader = document.getElementById('loader');
+        const card = document.getElementById('card');
+        const errorMsg = document.getElementById('errorMsg');
+
+        // Функция показа кнопки, если данные есть
+        function showBtn(elementId, link) {
+            const btn = document.getElementById(elementId);
+            if (btn && link) {
+                btn.href = link;
+                btn.style.display = 'block';
+            }
+        }
+
+        if (id && managers[id]) {
+            const data = managers[id];
+            
+            // Заголовок
+            const titleElement = document.getElementById('managerName');
+            // Если это общий контакт (ID 0), пишем "Контакти компанії"
+            if (id === "0") {
+                titleElement.innerHTML = data.name; 
+            } else {
+                titleElement.innerHTML = "Ваш менеджер:<br>" + data.name;
+            }
+
+            // Включаем нужные кнопки
+            showBtn('linkPhone', data.phone);
+            showBtn('linkViber', data.viber);
+            showBtn('linkTg', data.tg);
+            showBtn('linkInsta', data.insta);
+            showBtn('linkFb', data.fb);
+            showBtn('linkSite', data.site);
+            showBtn('linkMail', data.email);
+            
+            // Показываем карточку
+            loader.style.display = 'none';
+            card.style.display = 'block';
+        } else {
+            loader.style.display = 'none';
+            errorMsg.style.display = 'block';
+            errorMsg.innerText = "Помилка: Невірне посилання або контакт не знайдено.";
+        }
+
+        // Функция отправки статистики
+        function sendStat(type) {
+            if (!SCRIPT_URL || SCRIPT_URL.includes("ВСТАВЬТЕ")) return;
+            fetch(SCRIPT_URL + "?id=" + id + "&type=" + type + "&agent=" + navigator.userAgent, { mode: 'no-cors' });
+        }
+    </script>
+</body>
+</html>
