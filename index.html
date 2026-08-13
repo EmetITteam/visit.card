@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EMET · Контакти</title>
+  <!--
+    Корінь сайту веде на візитку компанії.
+
+    GitHub Pages при заході на «/» шукає саме index.html — без нього корінь
+    віддавав 404, хоча company.html і manager.html відкривались за прямими
+    посиланнями. Тобто сайт «не працював» рівно на головній адресі, яку і
+    дають людям.
+
+    Візитка менеджера відкривається окремо: manager.html?id=<номер>.
+  -->
+  <meta http-equiv="refresh" content="0; url=company.html">
+  <link rel="canonical" href="company.html">
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: #f6f9fc;
+      color: #062a3d;
+    }
+    a { color: #066aab; }
+  </style>
+</head>
+<body>
+  <!-- Видно лише якщо перенаправлення не спрацювало (JS/meta вимкнені). -->
+  <p>Відкриваємо контакти EMET… <a href="company.html">Перейти вручну</a></p>
+  <script>location.replace('company.html');</script>
+</body>
+</html>
