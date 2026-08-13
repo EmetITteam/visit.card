@@ -110,30 +110,10 @@
         
         // Ссылка на Google Script (Ваша, правильная)
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzDD6I6MooOgkt8Pqde0TRoMGqeGTec1rO-RDidSYTJgWG7926JihehAf7R4lV-nSk/exec"; 
-
-
-        // БАЗА ДАННЫХ ВСЕХ 19 МЕНЕДЖЕРОВ (Украинский язык)
-        const managers = {
-            "1": { name: "Бойко Ольга", tg: "https://t.me/+380979590833", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380979590833", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "2": { name: "Золотченко Олена", tg: "https://t.me/+380675228279", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675228279", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "3": { name: "Каратеєва Олена", tg: "https://t.me/+380676360299", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380676360299", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "4": { name: "Клименко Марина", tg: "https://t.me/+380673350210", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380673350210", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "5": { name: "Крижня Карина", tg: "https://t.me/+380675206991", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675206991", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "6": { name: "Мігашко Анна", tg: "https://t.me/+380676428988", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380676428988", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "7": { name: "Пашковська Юлія", tg: "https://t.me/+380679216305", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380679216305", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "8": { name: "Пушкарська Вікторія", tg: "https://t.me/+380980797797", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380980797797", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "9": { name: "Селіванова Вікторія", tg: "https://t.me/+380676523343", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380676523343", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "10": { name: "Тесленко Марія", tg: "https://t.me/+380981812070", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380981812070", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "11": { name: "Ткаченко Юлія", tg: "https://t.me/+380673320440", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380673320440", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "12": { name: "Претолюк Ілона", tg: "https://t.me/+380671967707", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380671967707", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "13": { name: "Сірик Людмила", tg: "https://t.me/+380678800286", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380678800286", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "14": { name: "Нєкова Катерина", tg: "https://t.me/+380671100901", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380671100901", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "15": { name: "Войналович Олена", tg: "https://t.me/+380677875549", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380677875549", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "16": { name: "Бакумова Аліна", tg: "https://t.me/+380675660356", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675660356", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "17": { name: "Андрющенко Юлія", tg: "https://t.me/+380675707868", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675707868", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "18": { name: "Фещенко Ганна", tg: "https://t.me/+380675228219", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380675228219", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" },
-            "19": { name: "Хамуляк Альона", tg: "https://t.me/+380678789100", viber: "https://emetitteam.github.io/viber-redirect/?number=%2B380678789100", insta: "https://www.instagram.com/emet.ua?igsh=a201dzR0N3NhbDlm" }
-        };
+        // Дані менеджера лежать в окремому файлі m/<id>.json і тягнуться на
+        // вимогу. Раніше тут був масив усіх 19 записів — тобто будь-хто, хто
+        // відкривав вихідний код сторінки, забирав увесь список контактів
+        // одним рухом. Тепер сторінка знає лише про того, кого відкрили.
 
         // ==========================================
         // ЛОГИКА РАБОТЫ
@@ -144,10 +124,20 @@
         const loader = document.getElementById('loader');
         const card = document.getElementById('card');
         const errorMsg = document.getElementById('errorMsg');
+        function showError() {
+            loader.style.display = 'none';
+            errorMsg.style.display = 'block';
+            errorMsg.innerText = "Помилка: Невірне посилання або менеджера не знайдено.";
+        }
 
-        // Проверяем, есть ли такой менеджер
-        if (id && managers[id]) {
-            const data = managers[id];
+        // Приймаємо лише цифри: id підставляється в шлях до файлу, і будь-що
+        // інше там робити нічого.
+        if (!id || !/^\d+$/.test(id)) {
+            showError();
+        } else {
+            fetch('m/' + id + '.json', { cache: 'no-store' })
+                .then(function (r) { if (!r.ok) throw new Error('not found'); return r.json(); })
+                .then(function (data) {
             
             // Заполняем данными
             document.getElementById('managerName').innerHTML = "Ваш менеджер:<br>" + data.name;
@@ -165,11 +155,8 @@ if (data.tg) {
             // Показываем карточку
             loader.style.display = 'none';
             card.style.display = 'block';
-        } else {
-            // Если ID нет или он неверный
-            loader.style.display = 'none';
-            errorMsg.style.display = 'block';
-            errorMsg.innerText = "Помилка: Невірне посилання або менеджера не знайдено.";
+                })
+                .catch(showError);
         }
 
         // Функция отправки статистики (тихая)
